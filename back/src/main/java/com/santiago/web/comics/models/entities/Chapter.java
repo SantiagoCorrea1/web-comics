@@ -1,4 +1,4 @@
-package com.santiago.web.comics.entities;
+package com.santiago.web.comics.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,12 @@
-package com.santiago.web.comics.entities;
+package com.santiago.web.comics.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,6 +19,6 @@ public class Type {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @OneToOne (mappedBy = "type")
-    private Comic comic;
+    @OneToMany (mappedBy = "type", cascade = CascadeType.ALL)
+    private Set<Comic> comics;
 }

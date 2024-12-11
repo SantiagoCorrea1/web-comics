@@ -1,4 +1,4 @@
-package com.santiago.web.comics.entities;
+package com.santiago.web.comics.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,18 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Genre {
+public class ChapterPage {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @ManyToMany (mappedBy = "genres")
-    private Set<Comic> comics;
+    private int page_number;
+    private String img_url;
+    @ManyToOne
+    @JoinColumn(name = "chapter_id", nullable = false)
+    private Chapter chapter;
 }

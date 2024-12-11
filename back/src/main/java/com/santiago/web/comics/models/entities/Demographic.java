@@ -1,4 +1,4 @@
-package com.santiago.web.comics.entities;
+package com.santiago.web.comics.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,12 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Author {
+public class Demographic {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column (nullable = false)
     private String name;
-    @Column (nullable = false)
-    private String email;
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany(mappedBy = "demographic", cascade = CascadeType.ALL)
     private Set<Comic> comics;
+
 }
