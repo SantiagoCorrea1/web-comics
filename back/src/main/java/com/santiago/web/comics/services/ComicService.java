@@ -5,6 +5,7 @@ import com.santiago.web.comics.models.entities.*;
 import com.santiago.web.comics.repositories.*;
 import com.santiago.web.comics.util.Util;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,23 +40,7 @@ public class ComicService {
         this.util = util;
     }
 
-    public void addComic(Comic comic){
-        comicRepository.save(comic);
-    }
-
-    public void deleteComic(Long id){
-        comicRepository.deleteById(id);
-    }
-
-    public Comic findById(Long id){
-        return comicRepository.findById(id).orElse(null);
-    }
-
-    public List<Comic> findAll(){
-        return comicRepository.findAll();
-    }
-
-    public ComicDto toDto(Comic comic) {
+    public ComicDto toComicDto(Comic comic) {
         Set<Long> authorsId = comic.getAuthors().stream()
                 .map(Author::getId)
                 .collect(Collectors.toSet());
@@ -110,6 +95,22 @@ public class ComicService {
                 genres
         );
     }
+    @Transactional
+    public void addComic(Comic comic){
+        comicRepository.save(comic);
+    }
+
+    public void deleteComic(Long id){
+        comicRepository.deleteById(id);
+    }
+
+    public Comic findById(Long id){
+        return comicRepository.findById(id).orElse(null);
+    }
+
+    public List<Comic> findAll(){
+        return comicRepository.findAll();
+    }
 
     public Comic findByUrl(String url){
         return comicRepository.findByUrl(url).orElse(null);
@@ -126,5 +127,7 @@ public class ComicService {
         }
         return comicRepository.findAllByGenres(genres).orElse(null);
     }
+
+
 
 }

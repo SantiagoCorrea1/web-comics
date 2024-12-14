@@ -1,15 +1,13 @@
 package com.santiago.web.comics.models.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 public class Chapter {
     @Id
@@ -20,5 +18,17 @@ public class Chapter {
     @ManyToOne
     @JoinColumn(name="comic_id", nullable=false)
     private Comic comic;
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ChapterPage> chapterPages;
+
+    public Chapter(Long id, String name, int chapter_number, Comic comic) {
+        this.id = id;
+        this.name = name;
+        this.chapter_number = chapter_number;
+        this.comic = comic;
+    }
+
+
+
 
 }

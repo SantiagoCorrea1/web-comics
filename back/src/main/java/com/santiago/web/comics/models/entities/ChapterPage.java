@@ -18,6 +18,6 @@ public class ChapterPage {
     private int page_number;
     private String img_url;
     @ManyToOne
-    @JoinColumn(name = "chapter_id", nullable = false)
+    @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 }

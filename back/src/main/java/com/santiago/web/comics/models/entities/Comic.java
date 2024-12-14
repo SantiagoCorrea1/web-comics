@@ -44,7 +44,7 @@ public class Comic {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
-    @OneToMany (mappedBy = "comic")
+    @OneToMany (mappedBy = "comic", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Chapter> chapters;
 
     public Comic(Long id, String name, String description, String imgUrl, Set<Author> authors, Format format, Type type, Status status, Demographic demographic, Set<Genre> genres) {
@@ -73,4 +73,10 @@ public class Comic {
         this.demographic = demographic;
         this.genres = genres;
     }
+
+    // Métodos auxiliares
+    public void addChapter(Chapter chapter) {
+        chapters.add(chapter);
+    }
+
 }
