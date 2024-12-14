@@ -8,6 +8,9 @@ import com.santiago.web.comics.repositories.ChapterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class ChapterPageService {
     final ChapterRepository chapterRepository;
@@ -35,11 +38,16 @@ public class ChapterPageService {
                 chapterRepository.findById(chapterPageDto.getChapterId()).orElse(null));
     }
 
-    public ChapterPageDto toChapterPageDto (ChapterPage chapterPage){
-        return new ChapterPageDto(chapterPage.getId(),
-                chapterPage.getPage_number(),
-                chapterPage.getImg_url(),
-                chapterPage.getChapter().getId());
+    public Set<ChapterPageDto> toChapterPageDto (Set<ChapterPage> chapterPages){
+        Set<ChapterPageDto> chapterPagesDto = new HashSet<>();
+        for (ChapterPage chapterPage: chapterPages) {
+            ChapterPageDto chapterPageDto = new ChapterPageDto(chapterPage.getId(),
+                    chapterPage.getPage_number(),
+                    chapterPage.getImg_url(),
+                    chapterPage.getChapter().getId());
+            chapterPagesDto.add(chapterPageDto);
+        }
+        return chapterPagesDto;
     }
 
     @Transactional

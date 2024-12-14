@@ -3,6 +3,7 @@ package com.santiago.web.comics.services;
 
 import com.santiago.web.comics.models.dtos.ChapterDto;
 import com.santiago.web.comics.models.entities.Chapter;
+import com.santiago.web.comics.models.entities.Comic;
 import com.santiago.web.comics.repositories.ChapterPageRepository;
 import com.santiago.web.comics.repositories.ChapterRepository;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ChapterService {
         return new ChapterDto(
                 chapter.getId(),
                 chapter.getName(),
-                chapter.getChapter_number(),
+                chapter.getChapterNumber(),
                 chapter.getComic().getId()
         );
     }
@@ -46,5 +47,9 @@ public class ChapterService {
 
     public Chapter findChapterById(Long id){
         return chapterRepository.findById(id).orElse(null);
+    }
+
+    public Chapter findChapterByChapter_numberAndComic(int number, Comic comic){
+        return chapterRepository.findByChapterNumberAndComic(number, comic).orElse(null);
     }
 }

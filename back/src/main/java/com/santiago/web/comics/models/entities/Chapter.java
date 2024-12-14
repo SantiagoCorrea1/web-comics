@@ -14,7 +14,7 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int chapter_number;
+    private int chapterNumber;
     @ManyToOne
     @JoinColumn(name="comic_id", nullable=false)
     private Comic comic;
@@ -24,7 +24,7 @@ public class Chapter {
     public Chapter(Long id, String name, int chapter_number, Comic comic) {
         this.id = id;
         this.name = name;
-        this.chapter_number = chapter_number;
+        this.chapterNumber = chapter_number;
         this.comic = comic;
     }
 

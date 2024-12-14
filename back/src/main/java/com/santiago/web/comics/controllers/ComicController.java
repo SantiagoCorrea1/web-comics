@@ -102,14 +102,6 @@ public class ComicController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-//    @GetMapping("/comics/{url}/chapter/{chapter}")
-//    public ResponseEntity<?> findChapterLongTrip(@PathVariable (name = "url")String url,
-//                                                 @PathVariable(name = "chapter") int id){
-//        if (comicService.findByUrl(url)!=null && chapterService.findChapterById(id)!=null) {
-//            return new ResponseEntity<>(chapterService.findChapterById(url, chapter), HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>("There are no comics to show",HttpStatus.NOT_FOUND);
-//    }
 
     @PostMapping("/comics/my-comics/{url}/add-chapter")
     public ResponseEntity<?> addChapterToComic(@RequestBody AddChapterRequest request,
@@ -121,7 +113,7 @@ public class ComicController {
             Set<ChapterPage> chapterPages = new HashSet<>();
             for (PageRequest pageRequest : request.getPageRequests()) {
                 ChapterPage chapterPage = chapterPageService.requestToChapter(pageRequest);
-                chapterPage.setChapter(chapter); // Asignar el capítulo a la página
+                chapterPage.setChapter(chapter);
                 chapterPages.add(chapterPage);
             }
             chapter.setChapterPages(chapterPages);
@@ -132,6 +124,15 @@ public class ComicController {
         return new ResponseEntity<>("There was an error", HttpStatus.NOT_ACCEPTABLE);
     }
 
-
+    @GetMapping("/comics/{url}/chapter/{chapter}")
+    public ResponseEntity<?> findChapterLongTrip(@PathVariable (name = "url")String url,
+                                                 @PathVariable(name = "chapter") int number){
+        Comic comic = comicService.findByUrl(url);
+        Chapter chapter = chapterService.findChapterByChapter_numberAndComic(number, comic);
+        if (comic!=null && chapter!=null) {
+            return new ResponseEntity<>(chapterPageService.toChapterPageDto(chapter.getChapterPages()), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("There are no comics to show",HttpStatus.NOT_FOUND);
+    }
 
 }
