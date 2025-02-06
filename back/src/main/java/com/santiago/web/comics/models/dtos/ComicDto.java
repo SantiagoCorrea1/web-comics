@@ -15,17 +15,17 @@ public class ComicDto {
     private String imgUrl;
     private String url;
     @NonNull
-    private Set<Long> authors;
+    private Set<String> authors;
     @NonNull
-    private Long format;
+    private String format;
     @NonNull
-    private Long type;
+    private String type;
     @NonNull
-    private Long status;
+    private String status;
     @NonNull
-    private Long demographic;
+    private String demographic;
     @NonNull
-    private Set<Long> genres;
+    private Set<String> genres;
 
 
 }

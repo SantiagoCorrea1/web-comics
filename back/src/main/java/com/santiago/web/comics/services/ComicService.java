@@ -41,12 +41,12 @@ public class ComicService {
     }
 
     public ComicDto toComicDto(Comic comic) {
-        Set<Long> authorsId = comic.getAuthors().stream()
-                .map(Author::getId)
+        Set<String> authorsId = comic.getAuthors().stream()
+                .map(Author::getName)
                 .collect(Collectors.toSet());
 
-        Set<Long> genresId = comic.getGenres().stream()
-                .map(Genre::getId)
+        Set<String> genresId = comic.getGenres().stream()
+                .map(Genre::getName)
                 .collect(Collectors.toSet());
 
         return new ComicDto(
@@ -56,29 +56,29 @@ public class ComicService {
                 comic.getImgUrl(),
                 comic.getUrl(),
                 authorsId,
-                comic.getFormat().getId(),
-                comic.getType().getId(),
-                comic.getStatus().getId(),
-                comic.getDemographic().getId(),
+                comic.getFormat().getName(),
+                comic.getType().getName(),
+                comic.getStatus().getName(),
+                comic.getDemographic().getName(),
                 genresId
         );
     }
 
     public Comic toComic(ComicDto comicDto) {
         Set<Author> authors = comicDto.getAuthors().stream()
-                .map(authorId -> authorRepository.findById(authorId)
+                .map(authorId -> authorRepository.findByName(authorId)
                         .orElseThrow(() -> new IllegalArgumentException("Invalid Author ID: " + authorId)))
                 .collect(Collectors.toSet());
 
         Set<Genre> genres = comicDto.getGenres().stream()
-                .map(genreId -> genreRepository.findById(genreId)
+                .map(genreId -> genreRepository.findByName(genreId)
                         .orElseThrow(() -> new IllegalArgumentException("Invalid Genre ID: " + genreId)))
                 .collect(Collectors.toSet());
 
-        Format format = formatRepository.findById(comicDto.getFormat()).orElse(null);
-        Type type = typeRepository.findById(comicDto.getType()).orElse(null);
-        Status status = statusRepository.findById(comicDto.getStatus()).orElse(null);
-        Demographic demographic = demographicRepository.findById(comicDto.getDemographic()).orElse(null);
+        Format format = formatRepository.findByName(comicDto.getFormat()).orElse(null);
+        Type type = typeRepository.findByName(comicDto.getType()).orElse(null);
+        Status status = statusRepository.findByName(comicDto.getStatus()).orElse(null);
+        Demographic demographic = demographicRepository.findByName(comicDto.getDemographic()).orElse(null);
         String url = (comicDto.getName() + "-" + util.getSaltString()).replace(" ", "-").toLowerCase();
 
         return new Comic(

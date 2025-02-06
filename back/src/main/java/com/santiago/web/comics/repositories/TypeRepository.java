@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface TypeRepository extends JpaRepository<Type, Long> {
     @Override
     Optional<Type> findById(Long aLong);
+    Optional<Type> findByName(String name);
 }

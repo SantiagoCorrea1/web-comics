@@ -9,4 +9,6 @@ public interface StatusRepository extends JpaRepository<Status,Long> {
 
     @Override
     Optional<Status> findById(Long aLong);
+    Optional<Status> findByName(String name);
+
 }

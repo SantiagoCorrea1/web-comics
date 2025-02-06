@@ -130,9 +130,21 @@ public class ComicController {
         Comic comic = comicService.findByUrl(url);
         Chapter chapter = chapterService.findChapterByChapter_numberAndComic(number, comic);
         if (comic!=null && chapter!=null) {
-            return new ResponseEntity<>(chapterPageService.toChapterPageDto(chapter.getChapterPages()), HttpStatus.OK);
+            return new ResponseEntity<>(chapterPageService.toChapterPageDto(chapter.getChapterPages() ), HttpStatus.OK);
         }
         return new ResponseEntity<>("There are no comics to show",HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/comics/{url}/chapters")
+    public ResponseEntity<?> findAllChaptersByComi(@PathVariable (name = "url")String url){
+
+        Comic comic = comicService.findByUrl(url);
+        Set<Chapter> chapters = chapterService.findChaptersByComic(comic);
+
+        if (chapters != null){
+            return new ResponseEntity<>( chapters.stream().map(chapterService::toChapterDto).
+                    collect(Collectors.toList()), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("There are no chapters to show",HttpStatus.NOT_FOUND);
+    }
 }

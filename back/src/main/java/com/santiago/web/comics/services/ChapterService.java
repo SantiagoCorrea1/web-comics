@@ -9,6 +9,8 @@ import com.santiago.web.comics.repositories.ChapterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 
 @Service
 public class ChapterService {
@@ -51,5 +53,9 @@ public class ChapterService {
 
     public Chapter findChapterByChapter_numberAndComic(int number, Comic comic){
         return chapterRepository.findByChapterNumberAndComic(number, comic).orElse(null);
+    }
+
+    public Set<Chapter> findChaptersByComic(Comic comic){
+        return chapterRepository.findAllByComic(comic).orElse(null);
     }
 }

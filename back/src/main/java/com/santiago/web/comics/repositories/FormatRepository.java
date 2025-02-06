@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface FormatRepository extends JpaRepository<Format, Long> {
     @Override
     Optional<Format> findById(Long aLong);
+    Optional<Format> findByName(String name);
+
 }

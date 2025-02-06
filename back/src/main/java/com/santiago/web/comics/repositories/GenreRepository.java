@@ -9,4 +9,5 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
 
     @Override
     Optional<Genre> findById(Long aLong);
+    Optional<Genre> findByName(String name);
 }

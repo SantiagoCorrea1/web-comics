@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface DemographicRepository extends JpaRepository<Demographic, Long> {
     @Override
     Optional<Demographic> findById(Long aLong);
+    Optional<Demographic> findByName(String name);
+
 }
