@@ -27,4 +27,14 @@ body {
 }
 
 
+hr.invisible {
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.card-info{
+  background-color: none;
+}
 

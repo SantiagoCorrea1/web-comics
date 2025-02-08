@@ -31,13 +31,13 @@ export const ComicPage = () => {
                             <div className="card-body">
                                 <h4>{comic.name}</h4>
                                 <ul className="list-group">
-                                    <li className="list-group-item info">Description: {comic.description}</li>
-                                    <li className="list-group-item info">Autor: {comic.authors}</li>
-                                    <li className="list-group-item info">Genres: {comic.genres}</li>
-                                    <li className="list-group-item info">Status: {comic.status}</li>
-                                    <li className="list-group-item info">Demographic: {comic.demographic}</li>
-                                    <li className="list-group-item info">Type: {comic.type}</li>
-                                    <li className="list-group-item info">Format: {comic.format}</li>
+                                    <li className="list-group-item info"><b>Description:</b> {comic.description}</li>
+                                    <li className="list-group-item info"><b>Authors:</b> {comic.authors}</li>
+                                    <li className="list-group-item info"><b>Genres:</b> {comic.genres}</li>
+                                    <li className="list-group-item info"><b>Status:</b> {comic.status}</li>
+                                    <li className="list-group-item info"><b>Demographic:</b> {comic.demographic}</li>
+                                    <li className="list-group-item info"><b>Type:</b> {comic.type}</li>
+                                    <li className="list-group-item info"><b>Format:</b> {comic.format}</li>
                                 </ul>
                                 <hr />
                                 
